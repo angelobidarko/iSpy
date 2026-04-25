@@ -16,3 +16,6 @@ pip install nltk
 pip install cloudscraper
 
 python3 -c "import nltk; nltk.download('wordnet')"
+
+pip install pillow
+
