@@ -12,5 +12,7 @@ Turns file into dictionary, and picks a random entry.
 **get2.py**
 
 pip install nltk
+
 pip install cloudscraper
+
 python3 -c "import nltk; nltk.download('wordnet')"
