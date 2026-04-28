@@ -31,49 +31,48 @@ def similar_enough(a, b, threshold=0.8):
 
 def words_match(guess_word, description_words, shown_words):
     """
-    Return True if guess_word is:
-    - exactly a description word (not already hinted), OR
-    - a close misspelling of a description word, OR
-    - a synonym (or close synonym) of a description word,
-    and the matched description word is not already in shown_words.
+    Return True if guess_word matches a description word or its synonyms,
+    provided it hasn't been used as a hint already.
     """
-    guess_word = guess_word.lower()
+    guess_word = guess_word.lower().strip()
     if not guess_word:
         return False
+    
+    # 1. Create a set of "forbidden" words (synonyms of words already hinted)
+    # This prevents the user from guessing a word that the game already told them.
+    forbidden_words = set()
+    for shown in shown_words:
+        shown_lower = shown.lower()
+        forbidden_words.add(shown_lower)
+        # Use your existing get_lemmas function
+        forbidden_words.update(get_lemmas(shown_lower))
 
-    # Direct match OR fuzzy match against description words
-    for dw in description_words:
-        if dw in shown_words:
-            continue  # don't allow winning on already-hinted words
-        if dw == guess_word:
-            return True
-        if similar_enough(guess_word, dw):
-            return True
-
-    # Synonym-based matching
-    guess_syns = get_lemmas(guess_word)
-    if not guess_syns:
+    # If the user guessed a word that is already a hint (or a synonym of one), reject it
+    if guess_word in forbidden_words:
         return False
 
-    for dw in description_words:
-        if dw in shown_words:
+    # 2. Check if the guess matches any description word or its synonyms
+    for desc_word in description_words:
+        desc_word = desc_word.lower()
+        
+        # Don't check against description words that are already shown
+        if desc_word in shown_words:
             continue
-
-        # If the description word itself is one of the guessed synonyms,
-        # or is fuzzily close to one of them, count that as a match.
-        if dw in guess_syns:
+            
+        # Get all acceptable synonyms for this description word
+        acceptable_synonyms = get_lemmas(desc_word)
+        acceptable_synonyms.add(desc_word)
+        
+        # Check for exact match in synonyms or direct word
+        if guess_word in acceptable_synonyms:
             return True
-
-        dw_syns = get_lemmas(dw)
-        if guess_syns & dw_syns:  # shared lemma
+            
+        # Check for fuzzy match against the description word itself
+        # Note: Ensure your similar_enough function accepts the 'threshold' argument
+        if similar_enough(guess_word, desc_word):
             return True
-
-        # Fuzzy check between guess synonyms and the description word
-        if any(similar_enough(syn, dw) for syn in guess_syns):
-            return True
-
+            
     return False
-
 
 # ---------- Fetch data and image ----------
 scraper = cloudscraper.create_scraper()
@@ -137,7 +136,7 @@ if user_guesses > max_guesses:
 print(f"You have {user_guesses} guesses. With each guess, guess_image.jpg will get clearer and you'll get one more hint word.")
 
 # ---------- Image blur settings ----------
-max_blur = 30  # very blurry start
+max_blur = 10  # blurry start
 min_blur_during_game = 3  # still a little blur on the last guess
 
 # We go from max_blur down to min_blur_during_game over user_guesses turns
