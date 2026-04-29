@@ -41,25 +41,23 @@ def combine_16bit(v1, v2):
        e.g., combine_16bit(32, 255) should produce 8447 or 0b0010000011111111
        v1 becomes the upper 8 bits, v2 becomes the lower 8 bits
     '''
-    return (v1 << 8) | v2
+    # return (v1 << 8) | v2
+    return v2
 
 def blend(envelope, hidden_images):
     '''Blend 5 hidden images into envelope in a 3+2 grid configuration'''
 
     blended = envelope.copy()
 
-    x_incr = 55  # ~85px
-    y_incr = 55  # ~55px
-
     # 3 on top row, 2 on bottom row
     positions = []
     for i in range(3):
-        x = x_incr + i * (128 + x_incr)
-        y = y_incr
+        x = 65 + i * (128 + 65)
+        y = 55
         positions.append((x, y))
     for i in range(2):
-        x = x_incr * 3 + i * (128 + x_incr)
-        y = y_incr + 128 + y_incr
+        x = 150 + i * (128 + 70)
+        y = 250
         positions.append((x, y))
 
     for hidden, (start_x, start_y) in zip(hidden_images, positions):
