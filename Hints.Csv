@@ -1,11 +1,11 @@
-"Names", '''hints'''
-"2 of hearts", '''[(black, white) "Organ" "Type of card" "Its not one its"]'''
-"Butterfly", '''[(black, blue) "Everyones favorite insect" "___ effect" "Its not a moth it’s a "]'''
-"Blueberries", '''[(blue, green) "Fruit" "Multicolored" "The color is in the name of this fruit!']'''
-"Hard Boiled Egg", '''[(white, yellow) "Food" "type of shell" "Is it the chicken or the ___"]'''
-"Leaf", '''[(orange) "Crunchy" "Autum" "rake em together and jump in em"]'''
-"Orange Slice", '''[(orange)"Piece of a fruit" "No knife needed for this" "Vitiamin D" ]'''
-"Cabbage", '''[(purple) "Normally green" "Good in a salad" "___ patch kid"]'''
-"Wine", '''[(red) "Beverage" "Not for kids" "its not beer its ___"]'''
-"Strawberry", '''[(red) "Fruit" "Really good on poundcake" "___ Shortcake"]'''
-"Tomato", '''[(red) "Fruit (debated vegetable)" "Good on burgers" "Ketchupt is made from ___"]'''
+ImageID,DisplayName,Hints
+card_resized,2 of Hearts,"[(black and white) ""Organ"" ""Type of card"" ""Its not one its""]"
+blue_buttergly_resized,Butterfly,"[(black and blue) ""Everyones favorite insect"" ""___ effect"" ""Its not a moth it’s a ""]"
+blueberries_resized,Blueberries,"[(blue and green) ""Fruit"" ""Multicolored"" ""The color is in the name of this fruit!""]"
+egg_resized,Hard Boiled Egg,"[(white and yellow) ""Food"" ""type of shell"" ""Is it the chicken or the ___""]"
+leaf_resized,Leaf,"[(orange) ""Crunchy"" ""Autum"" ""rake em together and jump in em""]"
+o_slice_resized,Orange Slice,"[(orange) ""Piece of a fruit"" ""No knife needed for this"" ""Vitamin D""]"
+cabbage_resized,Cabbage,"[(purple) ""Normally green"" ""Good in a salad"" ""___ patch kid""]"
+wine_resized,Wine,"[(red) ""Beverage"" ""Not for kids"" ""its not beer its ___""]"
+strawberry_resized,Strawberry,"[(red) ""Fruit"" ""Really good on poundcake"" ""___ Shortcake""]"
+tomato_resized,Tomato,"[(red) ""Fruit (debated vegetable)"" ""Good on burgers"" ""Ketchup is made from ___""]"
