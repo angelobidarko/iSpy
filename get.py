@@ -30,7 +30,7 @@ image.save("scraped_image.jpg")
 # print(image.size)
 
 
-all_icons = [f for f in os.listdir('img') if f.endswith(".jpg")]
+all_icons = [f for f in os.listdir('img') if f.endswith("_resized.jpg")]
 selected_icons = random.sample(all_icons, 5)
 
 def boxes_overlap(box1, box2):
