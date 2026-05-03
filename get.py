@@ -3,44 +3,6 @@ import random
 from PIL import Image, ImageFilter
 import os
 
-# def blur_white_background(image_path, output_path, threshold=230):
-#     img = Image.open(image_path).convert("RGBA")
-    
-#     # Create a mask where white/near-white pixels are selected
-#     data = img.getdata()
-#     mask = Image.new("L", img.size, 0)
-    
-#     new_mask_data = []
-#     for item in data:
-#         if item[0] > threshold and item[1] > threshold and item[2] > threshold:
-#             new_mask_data.append(255)
-#         else:
-#             new_mask_data.append(0)
-#     mask.putdata(new_mask_data)
-
-#     blurred_img = img.filter(ImageFilter.GaussianBlur(radius=10))
-    
-#     # Composite and save
-#     final_img = Image.composite(blurred_img, img, mask)
-#     final_img.convert("RGB").save(output_path)
-
-# # --- Batch Processing Logic ---
-
-# input_folder = "img_sized"
-# output_folder = "img_blurred"
-
-# # Create the output directory if it doesn't exist
-# if not os.path.exists(output_folder):
-#     os.makedirs(output_folder)
-
-# # Loop through all files in the img_sized directory
-# for filename in os.listdir(input_folder):
-#     if filename.lower().endswith((".jpg", ".jpeg", ".png")):
-#         input_path = os.path.join(input_folder, filename)
-#         output_path = os.path.join(output_folder, filename)
-        
-#         blur_white_background(input_path, output_path)
-
 scraper = cloudscraper.create_scraper()
 
 def get_image():
@@ -68,7 +30,7 @@ image.save("scraped_image.jpg")
 # print(image.size)
 
 
-all_icons = [f for f in os.listdir('img_blurred') if f.endswith(".jpg")]
+all_icons = [f for f in os.listdir('img') if f.endswith(".jpg")]
 selected_icons = random.sample(all_icons, 5)
 
 def boxes_overlap(box1, box2):
@@ -147,7 +109,7 @@ def combine_16bit(v1, v2):
     return v2
 
 envelope = Image.open("scraped_image.jpg")
-hidden_images = [Image.open(os.path.join("img_blurred", f)) for f in selected_icons]
+hidden_images = [Image.open(os.path.join("img", f)) for f in selected_icons]
 
 result = blend(envelope, hidden_images)
 result.save("new.jpg")
