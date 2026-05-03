@@ -231,8 +231,8 @@ def reveal_correct(original_blended, correct_item, images_dir, item_positions):
 def show_hints(target_item: dict, wrong_guesses: int):
     """Print one hint for the target item per wrong guess, revealed progressively."""
     print("\n── Hints ──────────────────────────────")
-    revealed = target_item["hints"][:wrong_guesses]
-    locked   = ["???"] * (4 - wrong_guesses)
+    revealed = target_item["hints"][:wrong_guesses + 1]
+    locked   = ["???"] * (4 - wrong_guesses - 1)
     hint_str = " | ".join(revealed + locked)
     print(f"  {hint_str}")
     print("────────────────────────────────────────\n")
@@ -252,8 +252,8 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
     all_items = load_items_from_csv(csv_path)
     selected  = random.sample(all_items, min(5, len(all_items)))
     target    = random.choice(selected)
-    print(f"\nEmbedding items: {[i['name'] for i in selected]}")
-    print(f"The user must find: '{target['name']}'\n")
+    #print(f"\nEmbedding items: {[i['name'] for i in selected]}")
+    #print(f"The user must find: '{target['name']}'\n")
 
     # 2. Load background
     bg_path    = bg_im()
@@ -289,7 +289,7 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
         blend_hidden_onto_background(background, img, pos)
         loaded_items.append(item)
         item_positions[item["name"]] = pos  # store the position
-        print(f"Embedded '{item['name']}' at position {pos}")
+        #print(f"Embedded '{item['name']}' at position {pos}")
 
     if not loaded_items:
         print("No images could be loaded. Exiting.")
@@ -298,7 +298,7 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
     # Make sure the target was actually loaded; fall back if not
     if target not in loaded_items:
         target = random.choice(loaded_items)
-        print(f"Original target skipped, new target: '{target['name']}'")
+        #print(f"Original target skipped, new target: '{target['name']}'")
 
     # 4. Freeze the blended image and save initial state
     original_blended = background.copy()
@@ -308,8 +308,8 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
     # 5. Game loop — user guesses the ONE target item
     wrong_guesses = 0
     MAX_WRONG     = 4
-
-    print(f"\nCan you find the hidden '{target['name']}'?")
+#{target['name']}
+    print(f"\nCan you find the hidden image?")
     print("The background will fade with each wrong guess, revealing all hidden images.\n")
 
     while wrong_guesses <= MAX_WRONG:
