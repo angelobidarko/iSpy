@@ -3,9 +3,6 @@ import random
 from PIL import Image, ImageFilter
 import os
 
-import os
-from PIL import Image, ImageFilter
-
 # def blur_white_background(image_path, output_path, threshold=230):
 #     img = Image.open(image_path).convert("RGBA")
     
