@@ -99,18 +99,23 @@ def blend(envelope, hidden_images):
     return blended
 
 
-def combine_16bit(v1, v2):
-    '''Combine two 8-bit values into a single 16-bit value
-    
-       e.g., combine_16bit(32, 255) should produce 8447 or 0b0010000011111111
-       v1 becomes the upper 8 bits, v2 becomes the lower 8 bits
+def combine_16bit(bg_val, hidden_val):
+    '''Embed the hidden pixel into the least significant bits of the background.
+
+       The background keeps its visible high bits, while the overlay image only
+       contributes its low 4 bits. This makes the hidden image appear as a very
+       faint pattern on top of the envelope.
     '''
-    # return (v1 << 8) | v2
-    return v2
+    bg_masked = bg_val & 0xF0  # Keep the high 4 bits of the background
+    hidden_masked = hidden_val & 0x0F  # Keep the low 4 bits of the hidden image
+    
+    return (bg_val & 0xF0) | (hidden_val & 0x0F)
 
 envelope = Image.open("scraped_image.jpg")
 hidden_images = [Image.open(os.path.join("img", f)) for f in selected_icons]
 
 result = blend(envelope, hidden_images)
 result.save("new.jpg")
-print("Open new.jpg to play game!")
+print("Open game_board.py and new.jpg to play game!")
+with open("current_session.txt", "w") as f:
+    f.write(",".join(selected_icons))
