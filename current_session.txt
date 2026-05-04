@@ -1,0 +1,1 @@
+card_resized.jpg,strawberry_resized.jpg,leaf_resized.jpg,egg_resized.jpg,blue_butterfly_resized.jpg
