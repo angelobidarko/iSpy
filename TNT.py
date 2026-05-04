@@ -35,7 +35,7 @@ def image_brightness(img):
     arr = np.array(img.convert("L"))
     return arr.mean()
 
-def bg_im(output_path="scraped_image.jpg", brightness_threshold=150):
+def bg_im(brightness_threshold=150):
     """Scrape a random image, only keeping it if it's dark enough."""
     while True:
         response = scraper.get("https://randomwordgenerator.com/json/pictures.json")
@@ -51,10 +51,8 @@ def bg_im(output_path="scraped_image.jpg", brightness_threshold=150):
         image = Image.open("temp.jpg").convert("RGB")
         brightness = image_brightness(image)
         if brightness < brightness_threshold:
-            image.save(output_path)
-            print("Background description:", random_image["description"])
-            print(f"Background saved as {output_path}!")
-            return output_path
+            image.save('scraped_image.jpg')
+            return 'scraped_image.jpg'
 
 
 # ─────────────────────────────────────────────
@@ -218,7 +216,7 @@ def show_hints(target_item: dict, wrong_guesses: int):
 #  MAIN COMPOSE + GAME LOOP
 # ─────────────────────────────────────────────
 
-def compose_and_play(csv_path: str, images_dir: str = "."):
+def compose_and_play(csv_path: str, images_dir: str = "."): # why specify that they're strings?
     # 1. Load all items from CSV, pick 5 at random to embed
     all_items = load_items_from_csv(csv_path)
     selected  = random.sample(all_items, min(5, len(all_items)))
@@ -273,19 +271,18 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
 
     # 5. Game loop — user guesses the target item, hidden images revealed on wrong guesses
     wrong_guesses = 0
-    MAX_WRONG     = 4
 
     print(f"\nCan you find the hidden image?")
     print("Hidden images will emerge with each wrong guess.\n")
 
-    while wrong_guesses <= MAX_WRONG:
+    while wrong_guesses <= 4:
         current_image = reveal_step(original_blended, wrong_guesses)
         current_image.save("reveal.jpg")
         current_image.show()
 
         show_hints(target, wrong_guesses)
 
-        if wrong_guesses == MAX_WRONG:
+        if wrong_guesses == 4:
             print(f"Out of guesses! The hidden item was: '{target['name']}'")
             reveal_correct(original_blended, target, images_dir, item_positions)
             break
@@ -298,7 +295,7 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
             break
         else:
             wrong_guesses += 1
-            print(f"✗ Wrong! ({wrong_guesses}/{MAX_WRONG} wrong guesses)")
+            print(f"✗ Wrong! ({wrong_guesses}/{4} wrong guesses)")
 
 
 # ─────────────────────────────────────────────
