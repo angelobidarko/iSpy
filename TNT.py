@@ -50,14 +50,11 @@ def bg_im(output_path="scraped_image.jpg", brightness_threshold=150):
             f.write(img_data)
         image = Image.open("temp.jpg").convert("RGB")
         brightness = image_brightness(image)
-        print(f"Image brightness: {brightness:.2f}")
         if brightness < brightness_threshold:
             image.save(output_path)
             print("Background description:", random_image["description"])
             print(f"Background saved as {output_path}!")
             return output_path
-        else:
-            print(f"Too bright ({brightness:.2f} >= {brightness_threshold}), retrying...")
 
 
 # ─────────────────────────────────────────────
@@ -109,8 +106,8 @@ def remove_white_background(img, threshold=200):
 # ─────────────────────────────────────────────
 
 def merge_pixel(bg_val, hidden_val):
-    bg_top     = bg_val & 0b11110000      # keep top 4 bits of background
-    hidden_bot = (hidden_val & 0b11110000) >> 5  # only top 4 bits of hidden
+    bg_top     = bg_val & 0b11111000      # keep top 5 bits of background
+    hidden_bot = (hidden_val & 0b11100000) >> 5  # only top 3 bits of hidden
     return bg_top | hidden_bot
 
 def blend_hidden_onto_background(background, hidden_img, position):
