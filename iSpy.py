@@ -199,7 +199,6 @@ def reveal_correct(original_blended, correct_item, images_dir, item_positions):
     x, y = item_positions[correct_item["name"]]
     result.paste(img, (x, y), img)  # use alpha channel as mask
     result.save("gameboard.jpg")
-    result.show()
 
 
 # ─────────────────────────────────────────────
@@ -282,7 +281,6 @@ def compose_and_play(csv_path: str, images_dir: str = "."):
     while wrong_guesses <= 4:
         current_image = reveal_step(original_blended, wrong_guesses)
         current_image.save("gameboard.jpg")
-        current_image.show()
 
         show_hints(target, wrong_guesses)
 
