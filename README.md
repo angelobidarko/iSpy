@@ -46,7 +46,7 @@ Install:
 
 References: 
 * https://www.youtube.com/watch?v=G6K9C0JGxxs
-* Claude: Wrote the contents of img_data in a file
+* Claude: Accessed bytes of image from URL, saved those bytes to a temporary file called temp.jpg
 
 ### `scraped_image.jpg`: 
 Output of either `scrape.py` or `iSpy.py`. Stores random image. Kept in repository for debugging purposes.
