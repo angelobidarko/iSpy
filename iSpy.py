@@ -69,7 +69,8 @@ def boxes_overlap(box1, box2):
         y1 + h1 <= y2 or
         y2 + h2 <= y1
     )
-
+##3 Checks to see if two boxes overlap, boxes have an x y width and height
+# Checks to see if the boxes are separated, if they are its returning false by return not
 def find_non_overlapping_position(bg_w, bg_h, fg_w, fg_h, existing_boxes, max_tries=1000):
     """Find a random position for a foreground image that doesn't overlap existing boxes."""
     for _ in range(max_tries):
@@ -78,6 +79,9 @@ def find_non_overlapping_position(bg_w, bg_h, fg_w, fg_h, existing_boxes, max_tr
         new_box = (x, y, fg_w, fg_h)
         if all(not boxes_overlap(new_box, b) for b in existing_boxes):
             return x, y
+            ### Finding positions with the background and foreground width and heights
+    #and checking to see if new X and Y variables are within this existinf boxes list. 
+    # for the bboxes in eexsisting boxes if they dont overallap we return the new x and y.
     return None
 
 
