@@ -305,5 +305,5 @@ def compose_and_play(csv_path: str, images_dir: str = "."): # why specify that t
 if __name__ == "__main__":
     compose_and_play(
         csv_path="TThints.csv",
-        images_dir="img",
+        images_dir="img_sized",
     )
