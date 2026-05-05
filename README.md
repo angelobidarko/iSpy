@@ -22,7 +22,7 @@ Claude references:
 Contains randomly-pulled background image and 5 embedded images from `img_sized` folder. Updates every time user inputs a guess. 
 
 ### `img`: 
-Folder of 10 images downloaded from the image, unedited. 
+Folder of 10 images downloaded from the internet, unedited. These 10 images are hardcoded to be 1 of our possible 5 hidden images.
 
 ### `img_resized`: 
 The folder containing images accessed in iSpy.py to embed into the background image. Images are created by `size_img.py`
