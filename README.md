@@ -39,7 +39,11 @@ The folder containing images accessed in iSpy.py to embed into the background im
 CSV file of 10 objects, their associated hints, and the name of the image file later accessed from `img_sized`
 
 ### `scrape.py`:
-Original mechanism for getting a random image from https://randomwordgenerator.com/picture.php
+Original mechanism for getting a random image from https://randomwordgenerator.com/picture.php. Kept in repository for debugging purposes. 
+
+Install: 
+* pip install cloudscraper 
+* pip install pillow 
 
 References: 
 * https://www.youtube.com/watch?v=G6K9C0JGxxs
