@@ -14,7 +14,7 @@ scraper = cloudscraper.create_scraper()
 def load_items_from_csv(csv_path: str) -> list[dict]:
     """Load image items from CSV with columns: Names, h0, h1, h2, h3, image."""
     items = []
-    with open(csv_path, newline='', encoding='utf-8') as f:
+    with open(csv_path) as f:
         reader = csv.DictReader(f)
         for row in reader:
             items.append({
