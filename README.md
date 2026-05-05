@@ -16,7 +16,9 @@ To play:
 Claude references: 
 * `image_brightness` function, later used in `bg_im` to make sure scraped image is dark enough to hide embedded images. `bg_im` uses same mechanism as `scrape.py` from check-in. See below. 
 * Changed treshold in `remove_white_background` to be variable instead of fixed. Function is more versatile
-* Labeled parameters in all function defintions for clarity 
+* Labeled parameters in all function defintions for clarity
+* 'boxes_overlap(box1, box2)' function, used to check if boxes (X,Y,width and height) of pictures overlap.
+* 'Find_non_overlapping_position' function, used to finx X,Y positions in which boxes will not overlap
 
 ### `gameboard.jpg`: 
 Contains randomly-pulled background image and 5 embedded images from `img_sized` folder. Updates every time user inputs a guess. 
