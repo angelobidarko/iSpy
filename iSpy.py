@@ -220,7 +220,7 @@ def show_hints(target_item: dict, wrong_guesses: int):
 #  MAIN COMPOSE + GAME LOOP
 # ─────────────────────────────────────────────
 
-def compose_and_play(csv_path: str, images_dir: str = "."): # why specify that they're strings?
+def compose_and_play(csv_path: str, images_dir: str = "."): 
     # 1. Load all items from CSV, pick 5 at random to embed
     all_items = load_items_from_csv(csv_path)
     selected  = random.sample(all_items, min(5, len(all_items)))
