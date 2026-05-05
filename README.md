@@ -49,4 +49,4 @@ References:
 * Claude: Wrote the contents of img_data in a file
 
 ### `scraped_image.jpg`: 
-Output of either `scrape.py` or `iSpy.py`. Stores random image. Kept in repository for debugging purposes. 
+Output of either `scrape.py` or `iSpy.py`. Stores random image. Kept in repository for debugging purposes.
