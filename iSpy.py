@@ -194,7 +194,7 @@ def reveal_correct(original_blended, correct_item, images_dir, item_positions):
 
     x, y = item_positions[correct_item["name"]]
     result.paste(img, (x, y), img)  # use alpha channel as mask
-    result.save("reveal.jpg")
+    result.save("gameboard.jpg")
     result.show()
 
 
@@ -266,8 +266,8 @@ def compose_and_play(csv_path: str, images_dir: str = "."): # why specify that t
 
     # 4. Freeze the blended image for use as the reveal base
     original_blended = background.copy()
-    original_blended.save("reveal.jpg")
-    print("\nInitial blended image saved as reveal.jpg")
+    original_blended.save("gameboard.jpg")
+    print("\nInitial blended image saved as gameboard.jpg")
 
     # 5. Game loop — user guesses the target item, hidden images revealed on wrong guesses
     wrong_guesses = 0
@@ -277,7 +277,7 @@ def compose_and_play(csv_path: str, images_dir: str = "."): # why specify that t
 
     while wrong_guesses <= 4:
         current_image = reveal_step(original_blended, wrong_guesses)
-        current_image.save("reveal.jpg")
+        current_image.save("gameboard.jpg")
         current_image.show()
 
         show_hints(target, wrong_guesses)
@@ -304,6 +304,6 @@ def compose_and_play(csv_path: str, images_dir: str = "."): # why specify that t
 
 if __name__ == "__main__":
     compose_and_play(
-        csv_path="TThints.csv",
+        csv_path="hints.csv",
         images_dir="img_sized",
     )
